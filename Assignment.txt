@@ -1,0 +1,34 @@
+Your primary goal is to migrate the current Java SE Swing based application to a Java 
+Web Application.
+
+Your secondary goal is to make the application accessible to REST clients as well.
+
+The current program is created with two options for the data model.  One solution uses 
+a database, the other simply uses data loaded into an in-memory collection. To start 
+with, stick with the non-database solution.  Once you get something working, hook
+the database back in. 
+
+You do not need to follow the current user interface exactly (but, don't go too crazy 
+on the UI right now, that is what Quad 3 is all about).  
+
+Don't try to take everything on at once.  Do your work in small chunks.  Try to get 
+something simple working first.  Then add a small feature and make sure it works.  
+Then add another, and so on.
+
+Take the time to plan your development effort.  What technologies will you use?  What
+will the UI look like?  What will you work on first, what next?
+
+Once you get the project working, be creative and add more functionality to the project.
+How about a way to add new questions and answers to the system?  How about keeping 
+statistics for users? etc.
+
+__________________________________________________________________________________________
+
+Use Spring MVC, JPA (not JDBC), 
+
+Other ptions: radio buttons (in JPA form), Tom
+
+Java Resources >> src >> Admin >>
+	Database considerations:
+		
+		

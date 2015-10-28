@@ -1,0 +1,21 @@
+## How to setup the derby database for this project:
+
+1) Open a Terminal and cd to your SD/Databases directory
+
+2) Run the following command to create and populate the database:
+
+sqlite3 quiz.db < quizdb-sqlite3.sql
+
+* The seven error messages you see are expected because they are dropping non-existent tables.
+
+3) Run the following command to start the sqlite3 program:
+
+sqlite3 quizdb
+
+4) Within the sqlite program, run this command to verify that the database was properly populated:
+
+select * from question;
+
+5) To exit sqlite simply type .exit:
+
+.exit

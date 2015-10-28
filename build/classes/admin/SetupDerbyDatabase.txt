@@ -1,0 +1,32 @@
+## How to setup the derby database for this project:
+
+1) Open a Terminal and cd to your SD/Databases directory
+
+2) Run the following command:
+
+startNetworkServer
+
+3) Open another Terminal window, cd to the SD/Databases directory 
+   and run the following command to start the ij program:
+
+ij
+
+4) Within the ij program, run this command to create the database:
+
+connect 'jdbc:derby://localhost:1527/quiz;create=true'; 
+
+5) Also within ij, run this command to populate the database (adjust the path as necessary):
+
+run 'quizdb-derby.sql'; 
+
+6) To verify that the previous command worked, run this command in ij:
+
+select * from question;
+
+7) To exit ij, simply use the exit command followed by a semicolon:
+
+exit;
+
+## If at some later date you wish to use ij to query the database, follow steps 1, 2, and 3
+## to start Derby and ij, then do step 4 with a small modification:
+##   connect 'jdbc:derby://localhost:1527/quiz'; 
