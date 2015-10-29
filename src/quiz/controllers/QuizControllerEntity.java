@@ -66,74 +66,48 @@ public class QuizControllerEntity {
 		if (userName.equals(userNameRef) && password.equals(passwordRef)) {
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("quiz", quizEntity);
-			mv.addObject("numQuestions", quizEntity.getQuestionEntities().size());
-			mv.addObject("questions", quizEntity.getQuestionEntities()); 
 			mv.addObject("count");
 			mv.setViewName("quizForm");
 			
 			return mv;
-			
 		} else {
 			return new ModelAndView("invalidLogin");
-
 		} //end: else if
 		
 	} //end: meth
 	
-//	quiz programming logic
 	@RequestMapping("/quizQuestion.do")
 	public ModelAndView quizQuestion(@ModelAttribute("quiz") QuizEntity quizEntity
-//			, @RequestParam("userResponse") String userResponse
+			, @RequestParam("userResponse") String userResponse
 			, @ModelAttribute("quizId") int quizId 
 			, @ModelAttribute("count") int count) {
-    	
-    	List<QuestionEntity> questions = quizEntity.getQuestionEntities();
-    	
-        if ((count) >= questions.size()) {
-        		System.out.println("Inside quizResults condition: " + questions.get(count - 1));
-        		
-        		
-        }//end: if
-        
-    	
-//		if data was submitted from the user
-//    	if (count >= questions.size()) {
-//    		System.out.println("Inside if conditional; : ");
-   			//attempt to use the Question.java methods to set and get the userResponse
-    		
-   			//get the previous question and set the user's answer to it
-//    		ModelAndView mv = new ModelAndView();
-//    		mv.addObject("quiz", quizEntity);
-//    		mv.setViewName("quizForm");
-//    		return mv;
-//    	} //end: if
-        
+		
+		System.out.println("User response: " + userResponse);
+       
     	ModelAndView mv = new ModelAndView();	
     	mv.addObject("quiz", quizEntity);
-    	mv.addObject("quizName", quizEntity.getName());
-		mv.addObject("numQuestions", quizEntity.getQuestionEntities().size());
-    	mv.addObject("questions", quizEntity.getQuestionEntities()); 
-
-    	mv.addObject("currentQuestion", questions.get(count));
-    	mv.addObject("answers", questions.get(count).getAnswerEntities());
     	mv.addObject("count", (count += 1));
 		mv.setViewName("quizForm");
 		
-//		testing
-//		System.out.println("Inside late quizQuestion method! Loaded new quiz: " 
-//				+ " quiz id: " + quizId + ", " 
-//				+ "quiz", quizEntity + ", "
-//				+ "quiz name: " + quizEntity.getName() + ", " 
-//				+ "number of questions: " + quizEntity.getQuestionEntities().size() + ", "
-//				+ "questions: " + quizEntity.getQuestionEntities() + ", "
-//				subtract 1 from count to avoid out-of-bounds exception
-//				+ "currentQuestion: " + questions.get(count - 1) + ", "
-//				+ "answers: " + questions.get(count).getAnswerEntities()
-//				+ "count: " + count + ", "
-//				+ ".");
-		
 		return mv;
 	}//end: m
+	
+//	quiz results summary
+	@RequestMapping("/quizResultSummary.do")
+	public ModelAndView quizResultSummary(@ModelAttribute("quiz") QuizEntity quizEntity
+			, @RequestParam("userResponse") String userResponse
+			, @ModelAttribute("quizId") int quizId 
+			, @ModelAttribute("count") int count) {
+		
+		System.out.println("User response: " + userResponse);
+       
+    	ModelAndView mv = new ModelAndView();	
+    	mv.addObject("quiz", quizEntity);
+    	mv.addObject("count", (count += 1));
+		mv.setViewName("quizResults");
+		
+		return mv;
+	}//end: m	
 	
 }//end: c
 

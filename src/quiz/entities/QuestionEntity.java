@@ -3,6 +3,7 @@ package quiz.entities;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class QuestionEntity {
 //	@ManyToMany(mappedBy = "questionEntities") //maps to field name on the owning side
 //	private List <AnswerEntity> answerEntities;
 	
-	@OneToMany(mappedBy = "questionEntity") //mappedBy element is the name of the reference field on the target side
+	@OneToMany(mappedBy = "questionEntity", fetch = FetchType.EAGER) //mappedBy element is the name of the reference field on the target side
 	private List <AnswerEntity> answerEntities;
 	
 //	contructors

@@ -14,9 +14,6 @@
 </head>
 <body>
 	<h1>Quiz App!</h1>
-	<!-- 	
-<a href="http://localhost:8080/SDQuizProject/redirectToLogin.do">Login Here</a><br />	
--->
 	<form action="loadQuiz.do" method="post">		
  		<label>
  			<span>User Name:</span><input type="text" name="userName" id="userName">
@@ -28,8 +25,7 @@
 		
 		<label>
 			<input type="submit" />
-		</label><br />
-		
+		</label><br />		
 <!-- 		
 		<label>
 			<input type="text" name="quizRequest" value="State Capitals">

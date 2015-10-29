@@ -13,11 +13,9 @@
 <title>Results</title>
 </head>
 <body>
-<!-- expression language -->
-<!-- display results of quiz taken -->
-    <h2><span>QuizApp!Summary Results for: </span><span>${quiz.name}</span></h2>
+    <h2>QuizApp!Summary Results for: ${quiz.name}</h2>
 	<form> <!-- action="DisplayQuestions.do" method="post" -->
-		<table border="1" class="left">
+<%-- 		<table border="1" class="left">
         <tr><th>Question</th><th>Answer</th><th>Response</th></tr>
 
             <c:forEach var="i" items="${quizSummary}">
@@ -29,8 +27,7 @@
 
                 <br/>    
             </c:forEach>
-  		</table> 
-    </form> 
-	
+  		</table>  --%>
+    </form> 	
 </body>
 </html>

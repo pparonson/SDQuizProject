@@ -15,47 +15,40 @@
 <title>Quiz Form</title>
 </head>
 <body>
-<!-- expression language -->	
-<%--  
- 	<table border="1" class="left">
-   	<tr><th>Question</th>
-    	<c:forEach var="i" items="${questions}">
-        	<tr>
-	        	<td>1<p></p>${i.text}</td>
-            </tr>
-                <br/>    
-        </c:forEach>
-  	</table> 
---%>
-	<h2>${quiz.name}</h2>
-	<div>Here. ${quiz.getQuestionEntities().size()}</div>
-  	<div>
-  		<span>This quiz has</span>
-  		<span>${numQuestions}</span>
-  		<span>questions.</span>
-  	</div>
-  	
-  	<div>
-  		<span>Count: </span>
-  		<span>${count}</span>
-  	</div>
-  	
-	<div>${currentQuestion.text}</div>
-
-	<form action="quizQuestion.do" method="post">
-		<table>
-			<c:forEach var="i" items="${answers}">
-				<br />
-				<input type="radio" name="userResponse" value="${i.text}">${i.text}<br />
-			</c:forEach>
-		</table>
-
-<!--  	 	<label>
- 	 		<input type="text" name="quizId" value="1">
-		</label> -->	 
-		<input type="submit">  
-	</form>
-
-	
+	<c:choose>	
+		<c:when test="${count < quiz.getQuestionEntities().size() - 1}">
+			<h2>${quiz.name}</h2>
+  			<c:if test="${count < 1}">
+				<div>This quiz has ${quiz.getQuestionEntities().size()} questions.</div>
+  			</c:if> 
+		  	<div>Question #: ${count + 1}</div>
+		  	<div>${quiz.getQuestionEntities().get(count).getText()}</div>
+ 			<form action="quizQuestion.do" method="post">
+				<table>
+					<c:forEach var="i" items="${quiz.getQuestionEntities().get(count).getAnswerEntities()}">
+						<br />
+						<input type="radio" name="userResponse" value="${i.text}">${i.text}<br />
+					</c:forEach>
+				</table>	
+				<input type="submit">  
+			</form> 
+  		</c:when>
+  		<c:otherwise> 
+  			<h2>${quiz.name}</h2>
+  			<div>Question #: ${count + 1}</div>
+		  	<div>${quiz.getQuestionEntities().get(count).getText()}</div>
+ 			<form action="quizResultSummary.do" method="post">
+				<table>
+					<c:forEach var="i" items="${quiz.getQuestionEntities().get(count).getAnswerEntities()}"><br />
+						<input type="radio" name="userResponse" value="${i.text}">${i.text}<br />
+					</c:forEach>
+				</table>	 
+<!-- 			<label>
+		 	 		<input type="text" name="quizId" value="1">
+				</label>  -->	 
+				<input type="submit" value="Display results!">  
+			</form> 
+  		</c:otherwise>
+	</c:choose>	
 </body>
 </html>
