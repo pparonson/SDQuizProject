@@ -15,23 +15,8 @@
 <title>Quiz Form</title>
 </head>
 <body>
-	<!-- expression language -->	
-	<h2>${quiz.name}</h2>
-  	<div>
-  		<span>This quiz has</span>
-  		<span>${numQuestions}</span>
-  		<span>questions.</span>
-  	</div>
-
-  	<div>
-  		<span>Count: </span>
-  		<span>${count}</span>
-  	</div>
-<%-- 	<div>${questions}</div>	   --%>
-		<div>${currentQuestion.text}</div>
-<%-- 	
-	<div>${questions}</div>	
- 	
+<!-- expression language -->	
+<%--  
  	<table border="1" class="left">
    	<tr><th>Question</th>
     	<c:forEach var="i" items="${questions}">
@@ -42,20 +27,35 @@
         </c:forEach>
   	</table> 
 --%>
+	<h2>${quiz.name}</h2>
+	<div>Here. ${quiz.getQuestionEntities().size()}</div>
+  	<div>
+  		<span>This quiz has</span>
+  		<span>${numQuestions}</span>
+  		<span>questions.</span>
+  	</div>
+  	
+  	<div>
+  		<span>Count: </span>
+  		<span>${count}</span>
+  	</div>
+  	
+	<div>${currentQuestion.text}</div>
+
 	<form action="quizQuestion.do" method="post">
-	
 		<table>
 			<c:forEach var="i" items="${answers}">
 				<br />
-				<input type="radio" name="userResponse" value="${i.text}" />${i.text}<br />
+				<input type="radio" name="userResponse" value="${i.text}">${i.text}<br />
 			</c:forEach>
 		</table>
 
-	 	<label><input type="text" name="quizId" value="1"></input>
-		</label>	 
-		<input type="submit" /> 
+<!--  	 	<label>
+ 	 		<input type="text" name="quizId" value="1">
+		</label> -->	 
+		<input type="submit">  
+	</form>
 
-	</form> 
 	
 </body>
 </html>

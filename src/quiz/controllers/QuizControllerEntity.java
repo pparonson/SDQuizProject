@@ -16,12 +16,18 @@ import quiz.entities.QuestionEntity;
 import quiz.entities.QuizEntity;
 
 @Controller
-@SessionAttributes(value = {"quiz", "count"})
+@SessionAttributes(value = {"quiz", "quizId", "count"})
 public class QuizControllerEntity {
+	
 	//Create springMVC entity manager
 	@PersistenceContext
 	private EntityManager em;
 
+	@ModelAttribute("quizId") 
+		public int getQuizId() {
+		return 1;
+	}
+	
     @ModelAttribute("count")
     public int getInitialCount() {
         return 0;
@@ -35,15 +41,20 @@ public class QuizControllerEntity {
 //		return null;
 	} //end: m
     
+	
+//	quizId moved to @ModelAttribute to persist
 	@RequestMapping("/loadQuiz.do")
-	public ModelAndView loadQuiz(@RequestParam("quizId") int quizId
+	public ModelAndView loadQuiz(@ModelAttribute("quizId") int quizId
+//			, @RequestParam("quizId") int quizId
 			, @RequestParam("userName") String userName
 			, @RequestParam("password") String password
-			, @ModelAttribute("count") int count){
+			, @ModelAttribute("count") int count) {
+		
 		QuizEntity quizEntity = em.find(QuizEntity.class, quizId);
+		
 		String userNameRef = "pparonson";
 		String passwordRef = "letMeIn999";
-		
+		System.out.println("QuizId: " + quizId);
 		if (userName == null || password == null) {
 			return new ModelAndView("invalidLogin");
 		}//end: if
@@ -60,15 +71,6 @@ public class QuizControllerEntity {
 			mv.addObject("count");
 			mv.setViewName("quizForm");
 			
-//			Testing
-			System.out.println("Inside loadQuiz method! Loaded new quiz: " 
-					+ " quiz id: " + quizId + ", " 
-//					+ "quiz name: " + quizEntity + ", " 
-//					+ "number of questions: " + quizEntity.getQuestionEntities().size() + ", "
-//					+ "questions: " + quizEntity.getQuestionEntities() + ", "
-					+ "count: " + count 
-					+ ".");
-			
 			return mv;
 			
 		} else {
@@ -81,30 +83,29 @@ public class QuizControllerEntity {
 //	quiz programming logic
 	@RequestMapping("/quizQuestion.do")
 	public ModelAndView quizQuestion(@ModelAttribute("quiz") QuizEntity quizEntity
-			, @ModelAttribute("count") int count
 //			, @RequestParam("userResponse") String userResponse
-			) {
+			, @ModelAttribute("quizId") int quizId 
+			, @ModelAttribute("count") int count) {
     	
     	List<QuestionEntity> questions = quizEntity.getQuestionEntities();
-    	System.out.println("Inside early quizQuestion; Count: " + count);
     	
-        if (count <= questions.size()) {
-    		questions.get(count).getAnswerEntities().get(count);
+        if ((count) >= questions.size()) {
+        		System.out.println("Inside quizResults condition: " + questions.get(count - 1));
+        		
+        		
         }//end: if
+        
     	
 //		if data was submitted from the user
-//    	if (userResponse != null) {
-//    		currentQuestion = questions    questions.get(qdb.getCount() - 1);
-//   			System.out.println("quizResponse1 - postQuizForm.do" + qdb.getCount());
-//
-//   			//attempt to use the Question.java methods to set and get the userResponse
-//   			currentQuestion.setGivenAnswer(userResponse);
-//
-//   			//get the previous question and set the user's answer to it
-//   			System.out.println("Submitted answer is:" + currentQuestion.getGivenAnswer());
-//	    	System.out.println("Question count for submitted answer is: " + qdb.getCount());
-//   			System.out.println("Correct answer is:" + currentQuestion.getCorrectAnswer());
-//	    	System.out.println("Question count for correct answer is: " + qdb.getCount());
+//    	if (count >= questions.size()) {
+//    		System.out.println("Inside if conditional; : ");
+   			//attempt to use the Question.java methods to set and get the userResponse
+    		
+   			//get the previous question and set the user's answer to it
+//    		ModelAndView mv = new ModelAndView();
+//    		mv.addObject("quiz", quizEntity);
+//    		mv.setViewName("quizForm");
+//    		return mv;
 //    	} //end: if
         
     	ModelAndView mv = new ModelAndView();	
@@ -115,20 +116,21 @@ public class QuizControllerEntity {
 
     	mv.addObject("currentQuestion", questions.get(count));
     	mv.addObject("answers", questions.get(count).getAnswerEntities());
-    	mv.addObject("count", ++count);
+    	mv.addObject("count", (count += 1));
 		mv.setViewName("quizForm");
 		
-		System.out.println("Inside late quizQuestion method! Loaded new quiz: " 
+//		testing
+//		System.out.println("Inside late quizQuestion method! Loaded new quiz: " 
 //				+ " quiz id: " + quizId + ", " 
 //				+ "quiz", quizEntity + ", "
-				+ "quiz name: " + quizEntity.getName() + ", " 
-				+ "number of questions: " + quizEntity.getQuestionEntities().size() + ", "
+//				+ "quiz name: " + quizEntity.getName() + ", " 
+//				+ "number of questions: " + quizEntity.getQuestionEntities().size() + ", "
 //				+ "questions: " + quizEntity.getQuestionEntities() + ", "
-				+ "currentQuestion: " + questions.get(count) + ", "
+//				subtract 1 from count to avoid out-of-bounds exception
+//				+ "currentQuestion: " + questions.get(count - 1) + ", "
 //				+ "answers: " + questions.get(count).getAnswerEntities()
-				+ "count: " + count + ", "
-
-				+ ".");
+//				+ "count: " + count + ", "
+//				+ ".");
 		
 		return mv;
 	}//end: m

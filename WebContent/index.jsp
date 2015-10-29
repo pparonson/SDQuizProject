@@ -19,27 +19,25 @@
 -->
 	<form action="loadQuiz.do" method="post">		
  		<label>
- 			<span>User Name:</span><input type="text" name="userName" id="userName" />
+ 			<span>User Name:</span><input type="text" name="userName" id="userName">
 		</label> 
 		
 		<label>
-			<span>Password:</span><input type="text" name="password" id="password" />
+			<span>Password:</span><input type="text" name="password" id="password">
 		</label>  
 		
 		<label>
 			<input type="submit" />
 		</label><br />
 		
+<!-- 		
 		<label>
-			<input type="text" name="quizRequest" value="State Capitals" />
+			<input type="text" name="quizRequest" value="State Capitals">
+		</label> 	
+  		<label>
+			<input type="text" name="quizId" value="1">
 		</label>
-			
-		<label>
-			<input type="text" name="quizId" value="1"></input>
-		</label><br/> 
-		
-
-		
+-->		
 	</form>
 </body>
 </html>
