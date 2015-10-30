@@ -14,11 +14,11 @@
 </head>
 <body>
     <h2>QuizApp!Summary Results for: ${quiz.name}</h2>
-	<form> <!-- action="DisplayQuestions.do" method="post" -->
-<%-- 		<table border="1" class="left">
+	<form> 
+ 		<table border="1" class="left">
         <tr><th>Question</th><th>Answer</th><th>Response</th></tr>
 
-            <c:forEach var="i" items="${quizSummary}">
+<%--             <c:forEach var="i" items="${quizSummary}">
                 <tr>
 	                <td>1<p></p>${i[0]}</td>
 	                <td>2<p></p>${i[1]}</td>
@@ -26,8 +26,8 @@
                 </tr>
 
                 <br/>    
-            </c:forEach>
-  		</table>  --%>
+            </c:forEach> --%>
+  		</table>  
     </form> 	
 </body>
 </html>

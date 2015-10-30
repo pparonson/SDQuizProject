@@ -71,9 +71,7 @@ public class AnswerEntity {
 
 	@Override
 	public String toString() {
-		return "AnswerEntity [id=" + id + "," + ", text=" + text + ", correct="
-				+ correct + "]";
+		return "AnswerEntity [id=" + id + ", text=" + text + ", correct=" + correct + "]";
 	}
-	
 	
 } //end: class

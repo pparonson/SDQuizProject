@@ -1,4 +1,5 @@
 package quiz.controllers;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -26,12 +27,12 @@ public class QuizControllerEntity {
 	@ModelAttribute("quizId") 
 		public int getQuizId() {
 		return 1;
-	}
+	}//end: meth
 	
     @ModelAttribute("count")
     public int getInitialCount() {
         return 0;
-    }
+    }//end: meth
     
 	//use this method to initialize the quiz object stored in the session
 	//returns null because we expect the user to call loadQuiz method
@@ -39,8 +40,7 @@ public class QuizControllerEntity {
 	public QuizEntity getInitialQuiz() {
 		return em.find(QuizEntity.class, 1);
 //		return null;
-	} //end: m
-    
+	}//end: meth
 	
 //	quizId moved to @ModelAttribute to persist
 	@RequestMapping("/loadQuiz.do")
@@ -54,7 +54,7 @@ public class QuizControllerEntity {
 		
 		String userNameRef = "pparonson";
 		String passwordRef = "letMeIn999";
-		System.out.println("QuizId: " + quizId);
+
 		if (userName == null || password == null) {
 			return new ModelAndView("invalidLogin");
 		}//end: if
@@ -82,15 +82,32 @@ public class QuizControllerEntity {
 			, @ModelAttribute("quizId") int quizId 
 			, @ModelAttribute("count") int count) {
 		
-		System.out.println("User response: " + userResponse);
-       
+//		String currentQuestion = quizEntity.getQuestionEntities().get(count).getText();
+//		String givenAnswer = userResponse; 
+//		String correctAnswer = "";
+		
+//		obtain "correct answer" from AnswerEntity List
+//		for (AnswerEntity answer : quizEntity.getQuestionEntities().get(count).getAnswerEntities()) {
+//			if (answer.isCorrect() == 'Y' ) {
+//				correctAnswer = answer.getText();
+//			}//end: if
+//		}//end: foreach
+		
+//		add completed question / response set to quizSummary ArrayList
+//		List<String[]> quizSummary = new ArrayList<String[]>();
+//		for (QuestionEntity question : quizEntity.getQuestionEntities()) {
+//			String[] currentResult = {question.getText(), correctAnswer, givenAnswer };
+//			quizSummary.add(currentResult);
+//		}//end: foreach
+//				
     	ModelAndView mv = new ModelAndView();	
     	mv.addObject("quiz", quizEntity);
     	mv.addObject("count", (count += 1));
+//    	mv.addObject("quizSummary", quizSummary);
 		mv.setViewName("quizForm");
 		
 		return mv;
-	}//end: m
+	}//end: meth
 	
 //	quiz results summary
 	@RequestMapping("/quizResultSummary.do")
@@ -99,17 +116,15 @@ public class QuizControllerEntity {
 			, @ModelAttribute("quizId") int quizId 
 			, @ModelAttribute("count") int count) {
 		
-		System.out.println("User response: " + userResponse);
-       
     	ModelAndView mv = new ModelAndView();	
     	mv.addObject("quiz", quizEntity);
-    	mv.addObject("count", (count += 1));
+//    	mv.addObject("count", (count += 1));
 		mv.setViewName("quizResults");
 		
 		return mv;
-	}//end: m	
+	}//end: meth
 	
-}//end: c
+}//end: class
 
 
 
