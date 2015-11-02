@@ -18,16 +18,17 @@ public class QuestionEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	private String text;
 	
 	@ManyToMany(mappedBy = "questionEntities") //maps to field name on the owning side
 	private List <QuizEntity> quizEntities;
 	
-//	@ManyToMany(mappedBy = "questionEntities") //maps to field name on the owning side
-//	private List <AnswerEntity> answerEntities;
-	
 	@OneToMany(mappedBy = "questionEntity", fetch = FetchType.EAGER) //mappedBy element is the name of the reference field on the target side
 	private List <AnswerEntity> answerEntities;
+	
+	@OneToMany(mappedBy = "questionEntity") //mappedBy element is the name of the reference field on the target side
+	private List <SubmissionAnswerEntity> submissionAnswerEntities;
 	
 //	contructors
 	public QuestionEntity() {} //end: constr
@@ -55,6 +56,7 @@ public class QuestionEntity {
 	public List<AnswerEntity> getAnswerEntities() {
 		return answerEntities;
 	}
+	
 	@Override
 	public String toString() {
 		return "QuestionEntity [id=" + id + ", text=" + text + ", quizEntities=" + quizEntities + ", answerEntities="

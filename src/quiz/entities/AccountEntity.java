@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "account", schema = "app")
@@ -18,10 +20,15 @@ public class AccountEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name = "username")
 	private String userName;
+	
+	@Column(name = "password")
 	private String password;
+	
 	private String email;
 	
+	@Temporal(TemporalType.DATE) //@Temporal(TemporalType.DATE) versus @Temporal(DATE)
 	@Column(name = "registration_date")
 	private Date registrationDate;
 	
@@ -67,6 +74,12 @@ public class AccountEntity {
 
 	public List<QuizSubmissionEntity> getQuizSubmissionEntities() {
 		return quizSubmissionEntities;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountEntity [id=" + id + ", userName=" + userName + ", password=" + password + ", email=" + email
+				+ ", registrationDate=" + registrationDate + ", quizSubmissionEntities=" + quizSubmissionEntities + "]";
 	}
 	
 } //end: class

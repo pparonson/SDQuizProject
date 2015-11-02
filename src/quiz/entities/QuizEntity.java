@@ -19,12 +19,13 @@ public class QuizEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	private String name;
-//	private String text;
 	
 	@ManyToMany
 	@JoinTable(name = "quiz_question", schema = "app", joinColumns = @JoinColumn(name = "quiz_id")
 			  , inverseJoinColumns = @JoinColumn(name = "question_id"))
+	
 	private List <QuestionEntity> questionEntities; 
 	
 	@OneToMany(mappedBy = "quizEntity") //mappedBy element is the name of the reference field on the target side
@@ -56,18 +57,13 @@ public class QuizEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-//	public String getText() {
-//		return text;
-//	}
-//	public void setText(String text) {
-//		this.text = text;
-//	}
 	public List<QuestionEntity> getQuestionEntities() {
 		return questionEntities;
 	}
 	public List<QuizSubmissionEntity> getQuizSubmissionEntities() {
 		return quizSubmissionEntities;
 	}
+	
 	@Override
 	public String toString() {
 		return "QuizEntity [id=" + id + ", name=" + name + ", questionEntities=" + questionEntities

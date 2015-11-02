@@ -1,5 +1,7 @@
 package quiz.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,21 +18,19 @@ public class AnswerEntity {
 	//fields
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	
-//	@ManyToMany
-//	@JoinTable(name = "submission_answer", schema = "app", joinColumns = @JoinColumn(name = "answer_id")
-//			  , inverseJoinColumns = @JoinColumn(name = "question_id"))
-//	private List <QuestionEntity> questionEntities;
-	
-	@ManyToOne
-	@JoinColumn(name = "question_id") //name maps to the FK in the table
-	private QuestionEntity questionEntity; 
+	private int id;	
 	
 	private String text;
 	
 	@Column(name = "isCorrect")
-	private char correct; // cannot be converted to boolean?	
+	private char correct; 
+	
+	@ManyToOne
+	@JoinColumn(name = "question_id")//name maps to the FK in the table
+	private QuestionEntity questionEntity; 
+	
+	@OneToMany(mappedBy = "answerEntity")//mappedBy element is the name of the reference field on the target side
+	private List <SubmissionAnswerEntity> submissionAnswerEntities;
 		
 //	constructor
 	public AnswerEntity() {
@@ -47,24 +48,18 @@ public class AnswerEntity {
 	public int getId() {
 		return id;
 	}
-	
-
 	public QuestionEntity getQuestionEntity() {
 		return questionEntity;
 	}
-	
 	public char isCorrect() {
 		return correct;
 	}
-
 	public void setCorrect(char correct) {
 		this.correct = correct;
 	}
-	
 	public String getText() {
 		return text;
 	}
-
 	public void setText(String text) {
 		this.text = text;
 	}
