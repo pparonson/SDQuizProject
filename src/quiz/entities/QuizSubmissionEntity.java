@@ -1,5 +1,6 @@
 package quiz.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,11 @@ public class QuizSubmissionEntity {
 	@Temporal(TemporalType.DATE) //@Temporal(TemporalType.DATE) versus @Temporal(DATE)
 	@Column(name = "submission_time")
 	private Date submissionTime; //get java timeStamp
+
+	//constructor
+	public QuizSubmissionEntity() {
+		submissionAnswerEntities = new ArrayList<>();
+	}
 
 //	Getters and Setters
 	public AccountEntity getAccountEntity() {

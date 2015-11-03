@@ -35,6 +35,11 @@ public class AccountEntity {
 	@OneToMany(mappedBy = "accountEntity") //mappedBy element is the name of the reference field on the target side
 	private List <QuizSubmissionEntity> quizSubmissionEntities;
 
+	//	constructor
+	public AccountEntity() {
+		
+	}
+
 //	Getters and Setters
 	public String getUserName() {
 		return userName;

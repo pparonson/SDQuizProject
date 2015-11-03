@@ -15,12 +15,16 @@ public class QuizAppTest {
 		QuizEntity quizEntity = em.find(QuizEntity.class, 1); //1 is the primary key of the db quiz table
 		QuestionEntity questionEntity = em.find(QuestionEntity.class, 2); //1 is the primary key of the db quiz table
 		AnswerEntity answerEntity = em.find(AnswerEntity.class, 1);
-//		AccountEntity accountEntity = em.find(AccountEntity.class, 1);
+		AccountEntity accountEntity = em.find(AccountEntity.class, 1);
 		
 //		System.out.println("QuizEntity: " + quizEntity.getName());
 		System.out.println("QuestionEntity: " + questionEntity.getText() );
 //		System.out.println("AnswerEntity: " + answerEntity.getText());
-//		System.out.println("AccountEntity: " + accountEntity.getEmail());
+		System.out.println("AccountEntity: " + accountEntity.getEmail());
+		System.out.println("AccountEntity: " + accountEntity.getUserName());
+		System.out.println("AccountEntity: " + accountEntity.getPassword());
+		System.out.println("AccountEntity: " + accountEntity.getRegistrationDate());
+
 		
 //		List <QuestionEntity> questions = quizEntity.getQuestionEntities();
 //		for (QuestionEntity question : questions) {

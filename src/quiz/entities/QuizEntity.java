@@ -31,7 +31,7 @@ public class QuizEntity {
 	@OneToMany(mappedBy = "quizEntity") //mappedBy element is the name of the reference field on the target side
 	private List <QuizSubmissionEntity> quizSubmissionEntities;
 	
-//	constructors
+	//	constructors no-arg
 	public QuizEntity() {
 		
 	} //end: constr

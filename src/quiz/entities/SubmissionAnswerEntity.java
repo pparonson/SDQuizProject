@@ -1,5 +1,7 @@
 package quiz.entities;
 
+import java.awt.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,27 +15,26 @@ import javax.persistence.Table;
 @Table(name = "submission_answer", schema = "app")
 public class SubmissionAnswerEntity {
 	//Composite primary key (submission_id, question_id)
-	@Id 	
-	@Column(name = "submission_id")
-	private int submissionId;
-	
+	@Id
 	@ManyToOne
-	@JoinColumn(name = "submission_id", insertable = false, updatable = false) //name maps to the FK in the table
+	@JoinColumn(name = "submission_id") //name maps to the FK in the table
 	private QuizSubmissionEntity quizSubmissionEntity;
 	
 	@Id
-	@Column(name = "queston_id")
-	private int questionId;
-	
 	@ManyToOne
-	@JoinColumn(name = "question_id", insertable = false, updatable = false) //name maps to the FK in the table
+	@JoinColumn(name = "question_id") //name maps to the FK in the table
 	private QuestionEntity questionEntity; 
 	
 	@ManyToOne
 	@JoinColumn(name = "answer_id") //name maps to the FK in the table
 	private AnswerEntity answerEntity;
 	
-//	getters and setters
+	//	constructor
+	public SubmissionAnswerEntity() {
+		
+	}
+
+	//	getters and setters
 	public QuizSubmissionEntity getQuizSubmissionEntity() {
 		return quizSubmissionEntity;
 	}
@@ -57,6 +58,9 @@ public class SubmissionAnswerEntity {
 	public void setAnswerEntity(AnswerEntity answerEntity) {
 		this.answerEntity = answerEntity;
 	}
+	
+//	methods
+
 
 	@Override
 	public String toString() {

@@ -29,8 +29,8 @@ public class QuestionEntity {
 	
 	@OneToMany(mappedBy = "questionEntity") //mappedBy element is the name of the reference field on the target side
 	private List <SubmissionAnswerEntity> submissionAnswerEntities;
-	
-//	contructors
+
+	//	contructors
 	public QuestionEntity() {} //end: constr
 	
 	public QuestionEntity(int id, String text, List<QuizEntity> quizEntities, List<AnswerEntity> answerEntities) {
@@ -55,6 +55,21 @@ public class QuestionEntity {
 	}
 	public List<AnswerEntity> getAnswerEntities() {
 		return answerEntities;
+	}
+	public List<SubmissionAnswerEntity> getSubmissionAnswerEntities() {
+		return submissionAnswerEntities;
+	}
+
+	public void setSubmissionAnswerEntities(List<SubmissionAnswerEntity> submissionAnswerEntities) {
+		this.submissionAnswerEntities = submissionAnswerEntities;
+	}
+
+	public void setQuizEntities(List<QuizEntity> quizEntities) {
+		this.quizEntities = quizEntities;
+	}
+
+	public void setAnswerEntities(List<AnswerEntity> answerEntities) {
+		this.answerEntities = answerEntities;
 	}
 	
 	@Override

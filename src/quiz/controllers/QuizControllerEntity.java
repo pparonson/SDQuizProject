@@ -1,5 +1,5 @@
 package quiz.controllers;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,12 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import quiz.entities.AccountEntity;
 import quiz.entities.AnswerEntity;
 import quiz.entities.QuestionEntity;
 import quiz.entities.QuizEntity;
+import quiz.entities.QuizSubmissionEntity;
+import quiz.entities.SubmissionAnswerEntity;
 
 @Controller
-@SessionAttributes(value = {"quiz", "quizId", "count"})
+@SessionAttributes(value = {"quiz"
+		, "quizId"
+		, "count"
+		, "quizSubmission"
+		})
 public class QuizControllerEntity {
 	
 	//Create springMVC entity manager
@@ -34,6 +41,11 @@ public class QuizControllerEntity {
         return 0;
     }//end: meth
     
+    @ModelAttribute("quizSubmission")
+    public QuizSubmissionEntity getInitialQuizSubmission() {
+    	return new QuizSubmissionEntity();
+    }//end: meth
+    
 	//use this method to initialize the quiz object stored in the session
 	//returns null because we expect the user to call loadQuiz method
 	@ModelAttribute("quiz")
@@ -44,26 +56,41 @@ public class QuizControllerEntity {
 	
 //	quizId moved to @ModelAttribute to persist
 	@RequestMapping("/loadQuiz.do")
-	public ModelAndView loadQuiz(@ModelAttribute("quizId") int quizId
+	public ModelAndView loadQuiz(@ModelAttribute("quiz") QuizEntity quizEntity
+			, @ModelAttribute("quizSubmission") QuizSubmissionEntity quizSubmissionEntity
+			, @ModelAttribute("quizId") int quizId
 //			, @RequestParam("quizId") int quizId
 			, @RequestParam("userName") String userName
 			, @RequestParam("password") String password
 			, @ModelAttribute("count") int count) {
 		
-		QuizEntity quizEntity = em.find(QuizEntity.class, quizId);
+//		create entity managers
+//		QuizEntity quizEntity = em.find(QuizEntity.class, quizId); //redundant 
+//		AccountEntity account = em.find(AccountEntity.class, 1);
+				
+		String query = "SELECT a FROM AccountEntity a WHERE a.userName = ?1";
+		List<AccountEntity> result = em.createQuery(query, AccountEntity.class).setParameter(1, userName).getResultList();
 		
-		String userNameRef = "pparonson";
-		String passwordRef = "letMeIn999";
+		AccountEntity queryResult = result.get(0);
+//		System.out.println("userAccount: " + account.getId());
+		System.out.println("Query results: " + queryResult);
 
 		if (userName == null || password == null) {
 			return new ModelAndView("invalidLogin");
 		}//end: if
 		
-		if(password.length() < 8) {
+		if(password.length() < 3) {
 			return new ModelAndView("invalidLogin");
 		}//end: if
 		
-		if (userName.equals(userNameRef) && password.equals(passwordRef)) {
+		if (userName.equals(queryResult.getUserName()) && password.equals(queryResult.getPassword())) {
+			quizSubmissionEntity.setAccountEntity(queryResult);
+			queryResult.getQuizSubmissionEntities().add(quizSubmissionEntity);
+			quizSubmissionEntity.setQuizEntity(quizEntity);
+			quizEntity.getQuizSubmissionEntities().add(quizSubmissionEntity);
+			Date date = new Date();
+			quizSubmissionEntity.setSubmissionTime(date);
+			
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("quiz", quizEntity);
 			mv.addObject("count");
@@ -78,28 +105,31 @@ public class QuizControllerEntity {
 	
 	@RequestMapping("/quizQuestion.do")
 	public ModelAndView quizQuestion(@ModelAttribute("quiz") QuizEntity quizEntity
+			, @ModelAttribute("quizSubmission") QuizSubmissionEntity quizSubmissionEntity
 			, @RequestParam("userResponse") String userResponse
 			, @ModelAttribute("quizId") int quizId 
 			, @ModelAttribute("count") int count) {
 		
-//		String currentQuestion = quizEntity.getQuestionEntities().get(count).getText();
-//		String givenAnswer = userResponse; 
-//		String correctAnswer = "";
+		SubmissionAnswerEntity submissionAnswerEntity = new SubmissionAnswerEntity();
+
+		QuestionEntity questionEntity = quizEntity.getQuestionEntities().get(count);
+		submissionAnswerEntity.setQuestionEntity(questionEntity);
+		questionEntity.getSubmissionAnswerEntities().add(submissionAnswerEntity);
+		submissionAnswerEntity.setQuizSubmissionEntity(quizSubmissionEntity);
+		quizSubmissionEntity.getSubmissionAnswerEntities().add(submissionAnswerEntity);
 		
-//		obtain "correct answer" from AnswerEntity List
-//		for (AnswerEntity answer : quizEntity.getQuestionEntities().get(count).getAnswerEntities()) {
-//			if (answer.isCorrect() == 'Y' ) {
-//				correctAnswer = answer.getText();
-//			}//end: if
-//		}//end: foreach
 		
-//		add completed question / response set to quizSummary ArrayList
-//		List<String[]> quizSummary = new ArrayList<String[]>();
-//		for (QuestionEntity question : quizEntity.getQuestionEntities()) {
-//			String[] currentResult = {question.getText(), correctAnswer, givenAnswer };
-//			quizSummary.add(currentResult);
-//		}//end: foreach
-//				
+		
+		for (AnswerEntity answerEntity : questionEntity.getAnswerEntities()) {
+			if (answerEntity.getText().equals(userResponse)) {
+				submissionAnswerEntity.setAnswerEntity(answerEntity);
+				answerEntity.getSubmissionAnswerEntities().add(submissionAnswerEntity);
+				break;
+			}//end: if
+		}//end: for
+		
+			
+			
     	ModelAndView mv = new ModelAndView();	
     	mv.addObject("quiz", quizEntity);
     	mv.addObject("count", (count += 1));
@@ -112,12 +142,15 @@ public class QuizControllerEntity {
 //	quiz results summary
 	@RequestMapping("/quizResultSummary.do")
 	public ModelAndView quizResultSummary(@ModelAttribute("quiz") QuizEntity quizEntity
+			, @ModelAttribute("quizSubmission") QuizSubmissionEntity quizSubmissionEntity
 			, @RequestParam("userResponse") String userResponse
 			, @ModelAttribute("quizId") int quizId 
 			, @ModelAttribute("count") int count) {
+				
 		
     	ModelAndView mv = new ModelAndView();	
     	mv.addObject("quiz", quizEntity);
+    	mv.addObject("submissionTime", quizSubmissionEntity.getSubmissionTime());
 //    	mv.addObject("count", (count += 1));
 		mv.setViewName("quizResults");
 		

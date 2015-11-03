@@ -14,6 +14,7 @@
 </head>
 <body>
     <h2>QuizApp!Summary Results for: ${quiz.name}</h2>
+    <div>Submission Time: ${submissionTime}</div>
 	<form> 
  		<table border="1" class="left">
         <tr><th>Question</th><th>Answer</th><th>Response</th></tr>

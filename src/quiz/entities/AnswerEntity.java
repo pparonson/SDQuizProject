@@ -32,7 +32,23 @@ public class AnswerEntity {
 	@OneToMany(mappedBy = "answerEntity")//mappedBy element is the name of the reference field on the target side
 	private List <SubmissionAnswerEntity> submissionAnswerEntities;
 		
-//	constructor
+public List<SubmissionAnswerEntity> getSubmissionAnswerEntities() {
+		return submissionAnswerEntities;
+	}
+
+	public void setSubmissionAnswerEntities(List<SubmissionAnswerEntity> submissionAnswerEntities) {
+		this.submissionAnswerEntities = submissionAnswerEntities;
+	}
+
+	public char getCorrect() {
+		return correct;
+	}
+
+	public void setQuestionEntity(QuestionEntity questionEntity) {
+		this.questionEntity = questionEntity;
+	}
+
+	//	constructor
 	public AnswerEntity() {
 		
 	} //end: constr
