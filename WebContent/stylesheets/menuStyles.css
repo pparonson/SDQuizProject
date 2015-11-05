@@ -8,144 +8,62 @@ Default color scheme: http://www.colorcombos.com/color-schemes/6656/ColorCombo66
     brown:      #473E3F
 
 */
-/* Basic Style */
 body {
-    /*background-image:url(images/crumpled_white_paper_texture.jpg);*/
-    background-color: #8EDC9D;
-    color: #473E3F;
+    background-image: url(../images/chalkboard-black.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #8EDC9D;
     font-size: 2em;
     font-family: 'Permanent Marker', cursive;
-}
+    padding-top: 40px;
+    margin-left: 40px;
 
-.container {
-    display: block;
-    width: 400px;
-    margin: 100px auto 0;
+
 }
 h1 {
     font-weight: bold;
-    font-size: 2em;
-    color: #F9E559;
+    font-size: 3em;
+    color: #6CCECB;
     text-align: center;
 }
 h2 {
     font-weight: bold;
-    font-size: 1em;
-    color: #218C8D;
+    font-size: 2em;
+    color: #6CCECB;
     text-align: center;
 }
-label {
-    
-}
-ul {
-    margin: 0;
-    padding: 0;
-}
-li * {
-    float: left;
-}
-li, h3 {
-    clear:both;
-    list-style:none;
-}
-input, button {
-    outline: none;
-}
-button {
-    background: none;
-    border: 0px;
-    color: #EF7126;
-    font-size: 15px;
-    width: 60px;
-    margin: 10px 0 0;
-    /*font-family: 'Special Elite', cursive;*/
-    font-family: 'Permanent Marker', cursive;
-    cursor: pointer;
-}
-button:hover {
-    color: #333;
-}
-/* Heading */
-h3,
-label[for='new-task'] {
-    color: #333;
-    font-weight: 700;
-    font-size: 15px;
-    border-bottom: 2px solid #333;
-    padding: 30px 0 10px;
-    margin: 0;
-    text-transform: uppercase;
-}
-input[type="text"] {
-    margin: 0;
-    font-size: 18px;
-    line-height: 18px;
-    height: 18px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    background: #fff;
+input {
+    background: transparent;
+    margin-top: 10px;
+    margin-left: 5px;
+    font-size: 20px;
+    height: 30px;
+    border: 2px solid #473E3F;
     border-radius: 6px;
-    font-family: 'Special Elite', cursive;
-    /*font-family: 'Permanent Marker', cursive;*/
-    /*font-family: 'Bangers', cursive;*/
     color: #EF7126;
+    font-family: 'Permanent Marker', cursive;
 }
-input[type="text"]:focus {
-    color: #333;
-}
+.container {
 
-/* New Task */
-label[for='new-task'] {
-    display: block;
-    margin: 0 0 20px;
 }
-input#new-task {
-    float: left;
-    width: 318px;
+.container2 {
+    /*text-align: center;*/
 }
-p > button:hover {
-    color: #0FC57C;
-}
+.login {
 
-/* Task list */
-li {
-    overflow: hidden;
-    padding: 20px 0;
-    border-bottom: 1px solid #eee;
 }
-li > input[type="checkbox"] {
-    margin: 0 10px;
-    position: relative;
-    top: 15px;
+.submitBtn {
+    color: #6CCECB;
+    padding-bottom: 10px;
 }
-li > label {
-    font-size: 18px;
-    line-height: 40px;
-    width: 237px;
-    padding: 0 0 0 11px;
+.tableHeader {
+    color: #6CCECB;
+    text-align: center;
 }
-li >  input[type="text"] {
-    width: 226px;
+.tableRow {
+    font-size: 20px;
+    text-align: center;
 }
-li > .delete:hover {
-    color: #CF2323;
-}
-
-/*#completed-tasks label {*/
-#correct label {
-    text-decoration: line-through;
-    color: #888;
-}
-
-/* Edit Task */
-ul li input[type=text] {
-    display:none;
-}
-
-ul li.editMode input[type=text] {
-    display:block;
-}
-
-ul li.editMode label {
-    display:none;
+#mainTitle {
+    text-shadow: 3px 3px 5px #218C8D;
 }

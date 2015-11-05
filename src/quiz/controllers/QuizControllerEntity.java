@@ -3,9 +3,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,8 +24,8 @@ import quiz.entities.SubmissionAnswerEntity;
 @Controller
 @SessionAttributes(value = {"quiz"
 		, "quizId"
-		, "count"
 		, "quizSubmission"
+		, "count"
 		})
 public class QuizControllerEntity {
 	
@@ -57,23 +59,19 @@ public class QuizControllerEntity {
 //	quizId moved to @ModelAttribute to persist
 	@RequestMapping("/loadQuiz.do")
 	public ModelAndView loadQuiz(@ModelAttribute("quiz") QuizEntity quizEntity
+//			, @RequestParam("quizId") int quizId
 			, @ModelAttribute("quizSubmission") QuizSubmissionEntity quizSubmissionEntity
 			, @ModelAttribute("quizId") int quizId
-//			, @RequestParam("quizId") int quizId
 			, @RequestParam("userName") String userName
 			, @RequestParam("password") String password
 			, @ModelAttribute("count") int count) {
 		
-//		create entity managers
-//		QuizEntity quizEntity = em.find(QuizEntity.class, quizId); //redundant 
-//		AccountEntity account = em.find(AccountEntity.class, 1);
-				
+//		create entity managers				
 		String query = "SELECT a FROM AccountEntity a WHERE a.userName = ?1";
 		List<AccountEntity> result = em.createQuery(query, AccountEntity.class).setParameter(1, userName).getResultList();
 		
+//		grab the accountEntity for the String query
 		AccountEntity queryResult = result.get(0);
-//		System.out.println("userAccount: " + account.getId());
-		System.out.println("Query results: " + queryResult);
 
 		if (userName == null || password == null) {
 			return new ModelAndView("invalidLogin");
@@ -90,7 +88,7 @@ public class QuizControllerEntity {
 			quizEntity.getQuizSubmissionEntities().add(quizSubmissionEntity);
 			Date date = new Date();
 			quizSubmissionEntity.setSubmissionTime(date);
-			
+						
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("quiz", quizEntity);
 			mv.addObject("count");
@@ -118,7 +116,37 @@ public class QuizControllerEntity {
 		submissionAnswerEntity.setQuizSubmissionEntity(quizSubmissionEntity);
 		quizSubmissionEntity.getSubmissionAnswerEntities().add(submissionAnswerEntity);
 		
+		for (AnswerEntity answerEntity : questionEntity.getAnswerEntities()) {
+			if (answerEntity.getText().equals(userResponse)) {
+				submissionAnswerEntity.setAnswerEntity(answerEntity);
+				answerEntity.getSubmissionAnswerEntities().add(submissionAnswerEntity);
+				break;
+			}//end: if
+		}//end: for
+			
+    	ModelAndView mv = new ModelAndView();	
+    	mv.addObject("quiz", quizEntity);
+    	mv.addObject("count", (count += 1));
+		mv.setViewName("quizForm");
 		
+		return mv;
+	}//end: meth
+	
+//	quiz results summary
+	@Transactional //annotation for CRUD operations
+	@RequestMapping("/quizResultSummary.do")
+	public ModelAndView quizResultSummary(@ModelAttribute("quiz") QuizEntity quizEntity
+			, @ModelAttribute("quizSubmission") QuizSubmissionEntity quizSubmissionEntity
+			, @RequestParam("userResponse") String userResponse
+			, @ModelAttribute("quizId") int quizId 
+			, @ModelAttribute("count") int count) {
+				
+		SubmissionAnswerEntity submissionAnswerEntity = new SubmissionAnswerEntity();
+		QuestionEntity questionEntity = quizEntity.getQuestionEntities().get(count);
+		submissionAnswerEntity.setQuestionEntity(questionEntity);
+		questionEntity.getSubmissionAnswerEntities().add(submissionAnswerEntity);
+		submissionAnswerEntity.setQuizSubmissionEntity(quizSubmissionEntity);
+		quizSubmissionEntity.getSubmissionAnswerEntities().add(submissionAnswerEntity);
 		
 		for (AnswerEntity answerEntity : questionEntity.getAnswerEntities()) {
 			if (answerEntity.getText().equals(userResponse)) {
@@ -128,31 +156,34 @@ public class QuizControllerEntity {
 			}//end: if
 		}//end: for
 		
-			
-			
     	ModelAndView mv = new ModelAndView();	
     	mv.addObject("quiz", quizEntity);
-    	mv.addObject("count", (count += 1));
-//    	mv.addObject("quizSummary", quizSummary);
-		mv.setViewName("quizForm");
-		
-		return mv;
-	}//end: meth
-	
-//	quiz results summary
-	@RequestMapping("/quizResultSummary.do")
-	public ModelAndView quizResultSummary(@ModelAttribute("quiz") QuizEntity quizEntity
-			, @ModelAttribute("quizSubmission") QuizSubmissionEntity quizSubmissionEntity
-			, @RequestParam("userResponse") String userResponse
-			, @ModelAttribute("quizId") int quizId 
-			, @ModelAttribute("count") int count) {
-				
-		
-    	ModelAndView mv = new ModelAndView();	
-    	mv.addObject("quiz", quizEntity);
-    	mv.addObject("submissionTime", quizSubmissionEntity.getSubmissionTime());
-//    	mv.addObject("count", (count += 1));
+    	mv.addObject("quizSubmission", quizSubmissionEntity);
 		mv.setViewName("quizResults");
+		
+//		entity manager operations
+//		em.clear();
+//		EntityTransaction et = em.getTransaction();
+//		et.begin();
+		try {
+//			for (Quiz submissionAnswerEntity : iterable) {
+//				
+//			}
+			em.persist(quizSubmissionEntity);
+//			et.commit(); 
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			try {
+//				if (et != null && et.isActive()) {
+//					et.rollback();
+//				}//end: if
+			} finally {
+//				if (em != null && em.isOpen()) {
+//					em.close();
+//				}//end: if
+			}//end: finally
+		}//end: try-catch-finally
 		
 		return mv;
 	}//end: meth

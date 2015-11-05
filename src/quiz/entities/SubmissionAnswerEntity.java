@@ -59,13 +59,11 @@ public class SubmissionAnswerEntity {
 		this.answerEntity = answerEntity;
 	}
 	
-//	methods
 
 
 	@Override
 	public String toString() {
-		return "SubmissionAnswerEntity [quizSubmissionEntity=" + quizSubmissionEntity + ", questionEntity="
-				+ questionEntity + ", answerEntity=" + answerEntity + "]";
+		return null;
 	}
 
 }//end: class

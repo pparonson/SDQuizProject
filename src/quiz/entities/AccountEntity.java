@@ -83,8 +83,7 @@ public class AccountEntity {
 
 	@Override
 	public String toString() {
-		return "AccountEntity [id=" + id + ", userName=" + userName + ", password=" + password + ", email=" + email
-				+ ", registrationDate=" + registrationDate + ", quizSubmissionEntities=" + quizSubmissionEntities + "]";
+		return null;
 	}
 	
 } //end: class

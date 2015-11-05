@@ -11,9 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <title>Invalid Login</title>
 </head>
-<body>
-	<h2>Please enter a valid user name and password.</h2>
-	<a href="http://localhost:8080/SDQuizProject/">Login error. Return to login here</a><br />
+<body class="container">
+	<h2 class="shake-slow">Please enter a valid user name and password.</h2>
+	<a href="http://localhost:8080/SDQuizProject/">Return to login page</a><br />
 </body>
 </html>
-

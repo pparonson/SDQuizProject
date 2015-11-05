@@ -66,8 +66,7 @@ public class QuizEntity {
 	
 	@Override
 	public String toString() {
-		return "QuizEntity [id=" + id + ", name=" + name + ", questionEntities=" + questionEntities
-				+ ", quizSubmissionEntities=" + quizSubmissionEntities + "]";
+		return null;
 	}
 	
 } //end: class

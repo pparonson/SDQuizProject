@@ -12,23 +12,31 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <title>Results</title>
 </head>
-<body>
-    <h2>QuizApp!Summary Results for: ${quiz.name}</h2>
-    <div>Submission Time: ${submissionTime}</div>
-	<form> 
- 		<table border="1" class="left">
-        <tr><th>Question</th><th>Answer</th><th>Response</th></tr>
-
-<%--             <c:forEach var="i" items="${quizSummary}">
-                <tr>
-	                <td>1<p></p>${i[0]}</td>
-	                <td>2<p></p>${i[1]}</td>
-	                <td>3<p></p>${i[2]}</td>
-                </tr>
-
-                <br/>    
-            </c:forEach> --%>
-  		</table>  
-    </form> 	
+<body class="container">
+	<h2>Thanx for playin' QuizApp!</h2>
+    <div>Summary of results for: ${quizSubmission.accountEntity.userName}</div>
+	<div>Quiz: ${quiz.name}</div>
+	<div>Date: quizSubmission.submissionTime</div>
+ 	<div>
+		<form class="container2">
+	 		<table>
+	        	<th class="tableHeader">Question</th>
+	        	<th class="tableHeader">Correct</th>
+	        	<th class="tableHeader">${quizSubmission.accountEntity.userName}</th>
+	        	</tr>
+ 	            	<c:forEach var="i" items="${quizSubmission.submissionAnswerEntities}">
+		        	<tr class="tableRow">
+		                <td>${i.questionEntity.text}</td>
+		                <c:forEach var="j" items="${i.questionEntity.answerEntities}">
+  	            			<c:if test='${j.correct.equals("Y")}'>
+								<td>${j.text}</td>
+  							</c:if>
+  						</c:forEach>
+ 		                <td>${i.answerEntity.text}</td>
+	                </tr>
+	        	</c:forEach>
+	  		</table>
+	    </form>
+    </div>
 </body>
 </html>

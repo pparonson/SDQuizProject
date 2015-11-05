@@ -40,10 +40,6 @@ public List<SubmissionAnswerEntity> getSubmissionAnswerEntities() {
 		this.submissionAnswerEntities = submissionAnswerEntities;
 	}
 
-	public char getCorrect() {
-		return correct;
-	}
-
 	public void setQuestionEntity(QuestionEntity questionEntity) {
 		this.questionEntity = questionEntity;
 	}
@@ -67,8 +63,11 @@ public List<SubmissionAnswerEntity> getSubmissionAnswerEntities() {
 	public QuestionEntity getQuestionEntity() {
 		return questionEntity;
 	}
-	public char isCorrect() {
-		return correct;
+//	public char isCorrect() {
+//		return correct;
+//	}
+	public String getCorrect() {
+		return  Character.toString(correct);
 	}
 	public void setCorrect(char correct) {
 		this.correct = correct;
@@ -82,7 +81,7 @@ public List<SubmissionAnswerEntity> getSubmissionAnswerEntities() {
 
 	@Override
 	public String toString() {
-		return "AnswerEntity [id=" + id + ", text=" + text + ", correct=" + correct + "]";
+		return null;
 	}
 	
 } //end: class

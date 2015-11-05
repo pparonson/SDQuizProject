@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,8 @@ public class QuizSubmissionEntity {
 	@JoinColumn(name = "quiz_id")//name maps to the FK in the table
 	private QuizEntity quizEntity;
 	
-	@OneToMany(mappedBy = "quizSubmissionEntity")//mappedBy element is the name of the reference field on the target side
+	
+	@OneToMany(mappedBy = "quizSubmissionEntity", cascade=CascadeType.PERSIST)//mappedBy element is the name of the reference field on the target side
 	private List <SubmissionAnswerEntity> submissionAnswerEntities;
 	
 	//submission_time
@@ -80,11 +82,18 @@ public class QuizSubmissionEntity {
 	public int getId() {
 		return id;
 	}
+	
+	//	methods
+//	public void addSubmissionAnswerEntity(SubmissionAnswerEntity submissionAnswerEntity) {
+//		if (!getSubmissionAnswerEntities().) {
+//			
+//		}//end: if
+//	}//end: meth
 
 	@Override
 	public String toString() {
-		return "QuizSubmissionEntity [id=" + id + ", accountEntity=" + accountEntity + ", quizEntity=" + quizEntity
-				+ ", submissionAnswerEntities=" + submissionAnswerEntities + ", submissionTime=" + submissionTime + "]";
+//		return "QuizSubmissionEntity [id=" + id + ", accountEntity=" + accountEntity + ", submissionAnswerEntities=" + submissionAnswerEntities + ", submissionTime=" + submissionTime + "]";
+		return null;
 	}
 	
 } //end: class
