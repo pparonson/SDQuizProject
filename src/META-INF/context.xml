@@ -6,5 +6,6 @@
  maxActive="100" maxIdle="30" maxWait="10000"
  username="app" password="app" 
  driverClassName="org.apache.derby.jdbc.ClientDriver"
- url="jdbc:derby://localhost:1527/quiz"/>
+ url="jdbc:derby://localhost:1527/quiz"
+ />
 </Context>

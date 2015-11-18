@@ -5,18 +5,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link type="text/css" rel="stylesheet" href="stylesheets/reset.css">
-    <link type="text/css" rel="stylesheet" href="stylesheets/menuStyles.css">
-    <link href='https://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link type="text/css"
+          rel="stylesheet"
+          href="stylesheets/reset.css">
+    <link type="text/css"
+          rel="stylesheet"
+          href="stylesheets/menuStyles.css">
+    <link href='https://fonts.googleapis.com/css?family=Special+Elite'
+          rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker'
+          rel='stylesheet'
+          type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
 <title>Results</title>
 </head>
 <body class="container">
-	<h2>Thanx for playin' QuizApp!</h2>
+    <div>
+	    <h2 class="titlePage">Thanx for playin' QuizApp!</h2>
+    </div>
     <div>Summary of results for: ${quizSubmission.accountEntity.userName}</div>
 	<div>Quiz: ${quiz.name}</div>
-	<div>Date: quizSubmission.submissionTime</div>
+	<div>Date: ${quizSubmission.submissionTime}</div>
  	<div>
 		<form class="container2">
 	 		<table>
@@ -24,15 +35,17 @@
 	        	<th class="tableHeader">Correct</th>
 	        	<th class="tableHeader">${quizSubmission.accountEntity.userName}</th>
 	        	</tr>
- 	            	<c:forEach var="i" items="${quizSubmission.submissionAnswerEntities}">
+ 	            	<c:forEach var="i"
+                               items="${quizSubmission.submissionAnswerEntities}">
 		        	<tr class="tableRow">
-		                <td>${i.questionEntity.text}</td>
-		                <c:forEach var="j" items="${i.questionEntity.answerEntities}">
+		                <td class="tableData">${i.questionEntity.text}</td>
+		                <c:forEach var="j"
+                                   items="${i.questionEntity.answerEntities}">
   	            			<c:if test='${j.correct.equals("Y")}'>
-								<td>${j.text}</td>
+								<td class="tableData">${j.text}</td>
   							</c:if>
   						</c:forEach>
- 		                <td>${i.answerEntity.text}</td>
+ 		                <td class="tableData">${i.answerEntity.text}</td>
 	                </tr>
 	        	</c:forEach>
 	  		</table>

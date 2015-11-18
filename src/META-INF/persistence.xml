@@ -20,7 +20,7 @@
       <property 
         name="javax.persistence.jdbc.url" 
         value="jdbc:derby://localhost:1527/quiz;"
-        />
+      />
       
       <property name="javax.persistence.jdbc.user" value="quiz"/>
       <property name="javax.persistence.jdbc.password" value="quiz"/>

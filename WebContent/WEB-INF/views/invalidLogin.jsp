@@ -4,10 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link type="text/css" rel="stylesheet" href="stylesheets/reset.css">
-    <link type="text/css" rel="stylesheet" href="stylesheets/menuStyles.css">
-    <link href='https://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+    <link type="text/css"
+          rel="stylesheet"
+          href="stylesheets/reset.css">
+    <link type="text/css"
+          rel="stylesheet"
+          href="stylesheets/menuStyles.css">
+    <link href='https://fonts.googleapis.com/css?family=Special+Elite'
+          rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker'
+          rel='stylesheet'
+          type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <title>Invalid Login</title>
 </head>
