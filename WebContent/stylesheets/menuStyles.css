@@ -12,11 +12,10 @@ body {
     background-image: url(../images/chalkboard-black.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    padding-top: 60px;
-    margin-left: 40px;
+    margin-top: 60px;
     color: #8EDC9D;
     font-family: 'Permanent Marker', cursive;
-    font-size: 35px;
+    font-size: 26px;
 }
 
 h1 {
@@ -26,7 +25,6 @@ h1 {
     border-style: solid;
     border-width: 0px 30px 7px;
     padding-bottom: 10px;
-
     border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 fill repeat;
     -moz-border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 repeat;
     -webkit-border-image: url(../images/../images/imageedit_6_9527335505.png) 10 0 4 repeat;
@@ -39,7 +37,18 @@ h2 {
     border-style: solid;
     border-width: 0px 30px 7px;
     padding-bottom: 10px;
+    border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 fill repeat;
+    -moz-border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 repeat;
+    -webkit-border-image: url(../images/../images/imageedit_6_9527335505.png) 10 0 4 repeat;
+    -o-border-image: url(../images/../images/../images/imageedit_6_9527335505.png) 10 0 4 repeat;
+}
+h3 {
+    font-size: 40px;
+    text-align: center;
 
+    border-style: solid;
+    border-width: 0px 30px 7px;
+    padding-bottom: 10px;
     border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 fill repeat;
     -moz-border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 repeat;
     -webkit-border-image: url(../images/../images/imageedit_6_9527335505.png) 10 0 4 repeat;
@@ -48,22 +57,21 @@ h2 {
 input {
     background: transparent;
     margin-top: 10px;
-    margin-left: 5px;
     padding-bottom: 5px;
     height: 30px;
-    font-family: 'Reenie Beanie', cursive;
-    font-style: italic;
-    font-size: 30px;
+    font-family: 'Permanent Marker', cursive;
+    /*font-family: 'Reenie Beanie', cursive;
+    font-style: italic;*/
+    font-size: 26px;
     color: #EF7126;
 
+    /*underLineBorder*/
     border-style: solid;
     border-width: 0px 30px 7px;
-
     border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 fill repeat;
     -moz-border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 repeat;
     -webkit-border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 repeat;
     -o-border-image: url(../images/imageedit_6_9527335505.png) 10 0 4 repeat;
-
 }
 .titlePage {
     text-shadow: 3px 3px 5px #218C8D;
@@ -73,75 +81,105 @@ input {
 .inputForm {
     padding-top: 20px;
 }
-.login {
-    xborder-style: hidden;
-}
 .btnSubmit {
     color: #6CCECB;
     font-family: 'Permanent Marker', cursive;
     font-size: 24px;
+    margin-top: 30px;
     border-style: none;
     border-image: none;
-
+}
+.quizDiv {
+    padding-top: 15px;
+    margin-left: 60px;
 }
 .quizForm {
-    padding-top: 10px;
+    margin-bottom: 40px;
 }
-.quizFormForm {
-    padding-top: 30px;
+input[type="radio"] {
+    xdisplay:none;
+    margin-left: 30px;
 }
+/*custom radio buttons*/
+/*div {
+  margin:0 0 0.75em 0;
+}
+
+input[type="radio"] {
+    xdisplay:none;
+}
+input[type="radio"] + label {
+    color: #218C8D;
+}
+input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+}
+input[type="radio"] + label span {
+     background-color:#218C8D;
+}
+input[type="radio"]:checked + label span{
+     background-color:#EF7126;
+}
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+  -webkit-transition:background-color 0.4s linear;
+  -o-transition:background-color 0.4s linear;
+  -moz-transition:background-color 0.4s linear;
+  transition:background-color 0.4s linear;
+}*/
+
 .userResponse {
     color: #8EDC9D;
 }
-.tableHeader .tableRow {
+.tableHeader {
     color: #6CCECB;
     text-align: center;
-
-    /*bilateralBorder*/
-    /*border-color: #EF7126;
-    border-style: solid;
-    border-width: 0px 7px;
-    -moz-border-image: url(imageedit_bilateralBorder.png) 0 7 repeat;
-    -webkit-border-image: url(imageedit_bilateralBorder.png) 0 7 repeat;
-    -o-border-image: url(imageedit_bilateralBorder.png) 0 7 repeat;
-    border-image: url(imageedit_bilateralBorder.png) 0 7 fill repeat;*/
-
-    /*leftBorder*/
-    /*border-style: solid;
-    border-width: 0px 0px 0px 7px;
-    -moz-border-image: url(imageedit_leftBorder.png) 0 0 0 7 repeat;
-    -webkit-border-image: url(imageedit_leftBorder.png) 0 0 0 7 repeat;
-    -o-border-image: url(imageedit_leftBorder.png) 0 0 0 7 repeat;
-    border-image: url(imageedit_leftBorder.png) 0 0 0 7 fill repeat;*/
-
-    /*rightBorder*/
-    /*border-style: solid;
-    border-width: 0px 7px 0px 0px;
-    -moz-border-image: url(imageedit_leftBorder.png) 0 7 0 0 repeat;
-    -webkit-border-image: url(imageedit_leftBorder.png) 0 7 0 0 repeat;
-    -o-border-image: url(imageedit_leftBorder.png) 0 7 0 0 repeat;
-    border-image: url(imageedit_leftBorder.png) 0 7 0 0 fill repeat;*/
+    padding-top: 30px;
+    padding-bottom: 10px;
 }
 .tableData {
-    padding: 5px;
-    /*border: 2px;*/
-
+    padding-left: 60px;
+    padding-right: 60px;
     font-size: 24px;
-
-    border-style: solid;
-    border-width: 0px 7px;
-    -moz-border-image: url(../images/imageedit_bilateralBorder.png) 0 7 repeat;
-    -webkit-border-image: url(../images/imageedit_bilateralBorder.png) 0 7 repeat;
-    -o-border-image: url(../images/imageedit_bilateralBorder.png) 0 7 repeat;
-    border-image: url(../images/imageedit_bilateralBorder.png) 0 7 fill repeat;
 }
-
 .correctAnswer {
     color: #EF7126;
 }
+.labelReturnLogin {
+
+}
+.hrefReturnLogin {
+    color: #EF7126;
+
+}
+#questionResult {
+    padding-right: 60px;
+}
+#correctResult {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+#userNameResult {
+    padding-left: 60px;
+}
 #quizQuestion {
     color: #6CCECB;
+    margin-top: 40px;
+}
+#questionTableData {
+    border-style: none;
+    border-image: none;
 }
 #correctAnswer {
     color: #EF7126;
+}
+#invalidLoginTitlePage {
+    margin-bottom: 40px;
 }

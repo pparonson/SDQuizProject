@@ -30,7 +30,8 @@
 <body class="container">
 	<%-- <div class="shake-slow shake-constant">Quiz App!</div> --%>
 	<h1 id="mainTitle" class="titlePage">Quiz App!</h1>
-	<div ng-controller="mainController">
+	<div ng-controller="mainController"
+		 class="quizDiv">
 	 	<form action="loadQuiz.do"
 			  method="post"
 			  name="loginForm"

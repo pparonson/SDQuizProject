@@ -17,28 +17,40 @@
     <link href='https://fonts.googleapis.com/css?family=Permanent+Marker'
           rel='stylesheet'
           type='text/css'>
+    <link type="text/css"
+          rel="stylesheet"
+          href="stylesheets/csshake-slow.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
     </script>
 <title>Results</title>
 </head>
 <body class="container">
     <div>
-	    <h2 class="titlePage">Thanx for playin' QuizApp!</h2>
+	    <h2 class="titlePage">Thanks for playing!</h2>
     </div>
-    <div>Summary of results for: ${quizSubmission.accountEntity.userName}</div>
-	<div>Quiz: ${quiz.name}</div>
-	<div>Date: ${quizSubmission.submissionTime}</div>
- 	<div>
-		<form class="container2">
+    <div class="quizDiv">
+        <span>Summary of results for: </span>
+        ${quizSubmission.accountEntity.userName}
+    </div>
+	<div class="quizDiv">
+        <span>Quiz: </span>
+        ${quiz.name}
+    </div>
+	<div class="quizDiv">
+        <span>Date: </span>
+        ${quizSubmission.submissionTime}
+    </div>
+ 	<div class="quizDiv">
+		<form class="quizForm">
 	 		<table>
-	        	<th class="tableHeader">Question</th>
-	        	<th class="tableHeader">Correct</th>
-	        	<th class="tableHeader">${quizSubmission.accountEntity.userName}</th>
+	        	<th class="tableHeader" id="questionResult">Question</th>
+	        	<th class="tableHeader" id="correctResult">Correct</th>
+	        	<th class="tableHeader" id="userNameResult">${quizSubmission.accountEntity.userName}</th>
 	        	</tr>
  	            	<c:forEach var="i"
                                items="${quizSubmission.submissionAnswerEntities}">
 		        	<tr class="tableRow">
-		                <td class="tableData">${i.questionEntity.text}</td>
+		                <td class="tableData" id="questionTableData">${i.questionEntity.text}</td>
 		                <c:forEach var="j"
                                    items="${i.questionEntity.answerEntities}">
   	            			<c:if test='${j.correct.equals("Y")}'>
@@ -50,6 +62,14 @@
 	        	</c:forEach>
 	  		</table>
 	    </form>
+        <label>
+            <div class="shake-slow shake-constant">
+                <a href="http://localhost:8080/SDQuizProject/"
+                   class="hrefReturnLogin">
+                   Quit
+                </a>
+            </div>
+        </label>
     </div>
 </body>
 </html>

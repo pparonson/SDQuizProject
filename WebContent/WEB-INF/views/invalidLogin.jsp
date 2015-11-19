@@ -10,17 +10,27 @@
     <link type="text/css"
           rel="stylesheet"
           href="stylesheets/menuStyles.css">
-    <link href='https://fonts.googleapis.com/css?family=Special+Elite'
-          rel='stylesheet'
-          type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Permanent+Marker'
           rel='stylesheet'
           type='text/css'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link type="text/css"
+          rel="stylesheet"
+          href="stylesheets/csshake-slow.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
 <title>Invalid Login</title>
 </head>
-<body class="container">
-	<h2 class="shake-slow">Please enter a valid user name and password.</h2>
-	<a href="http://localhost:8080/SDQuizProject/">Return to login page</a><br />
+<body class="quizDiv">
+	<h3 class="titlePage"
+         id="invalidLoginTitlePage">Please enter a valid user name and password.
+    </h3>
+    <label class="labelReturnLogin">
+        <div class="shake-slow shake-constant">
+            <a href="http://localhost:8080/SDQuizProject/"
+               class="hrefReturnLogin">
+               Return to login page
+            </a>
+        </div>
+    </label>
 </body>
 </html>

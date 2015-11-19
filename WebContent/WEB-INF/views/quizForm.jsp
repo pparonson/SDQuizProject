@@ -27,19 +27,27 @@
 		<c:when test="${count < quiz.getQuestionEntities().size() - 1}">
 			<h2 class="titlePage">${quiz.name}</h2>
   			<c:if test="${count < 1}">
-				<div class="quizForm">This quiz has ${quiz.getQuestionEntities().size()} questions.</div>
+				<div class="quizDiv">
+					This quiz has ${quiz.getQuestionEntities().size()} questions.
+				</div>
   			</c:if>
-		  	<div class="quizForm">Question #: ${count + 1}</div>
-		  	<div class="quizForm" id="quizQuestion">${quiz.getQuestionEntities().get(count).getText()}</div>
+		  	<div class="quizDiv">Question #: ${count + 1}</div>
+		  	<div class="quizDiv" id="quizQuestion">
+				${quiz.getQuestionEntities().get(count).getText()}
+			</div>
  			<form action="quizQuestion.do"
 				  method="post"
-				  class="quizFormForm">
+				  class="quizDiv">
 				<table class="questionList">
 					<c:forEach var="i" items="${quiz.getQuestionEntities().get(count).getAnswerEntities()}">
 						<p class="userResponse">
 							<input type="radio"
+								   id="${count}"
 							   	   name="userResponse"
-							       value="${i.text}">${i.text}
+							       value="${i.text}">
+								   <%-- broken custom css radio button using label --%>
+								   <label for="${count}"><span>${i.text}</span></label>
+								   <%-- ${i.text} --%>
 						</p>
 					</c:forEach>
 				</table>
@@ -48,15 +56,23 @@
   		</c:when>
   		<c:otherwise>
   			<h2 class="titlePage">${quiz.name}</h2>
-  			<div class="quizForm">Question #: ${count + 1}</div>
-		  	<div class="quizForm" id="quizQuestion">${quiz.getQuestionEntities().get(count).getText()}</div>
- 			<form action="quizResultSummary.do" method="post">
+  			<div class="quizDiv">Question #: ${count + 1}</div>
+		  	<div class="quizDiv"
+				 id="quizQuestion">
+				 ${quiz.getQuestionEntities().get(count).getText()}
+			</div>
+ 			<form action="quizResultSummary.do"
+				  method="post"
+				  class="quizDiv">
 				<table class="questionList">
 					<c:forEach var="i" items="${quiz.getQuestionEntities().get(count).getAnswerEntities()}">
 						<p class="userResponse">
 							<input type="radio"
+								   id="radio02"
 							       name="userResponse"
-							       value="${i.text}">${i.text}
+							       value="${i.text}">
+								<label for="radio02"><span></span>${i.text}</label>
+								<%-- ${i.text} --%>
 						</p>
 					</c:forEach>
 				</table>
