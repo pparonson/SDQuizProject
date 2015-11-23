@@ -63,42 +63,26 @@ public class QuizControllerEntity {
 	
 	@Transactional //annotation for CRUD operations
 	@RequestMapping("/createNewAccount.do")
-	public ModelAndView createNewAccount(@ModelAttribute("quiz") QuizEntity quizEntity
-//			, @RequestParam("quizId") int quizId
-			, @ModelAttribute("quizSubmission") QuizSubmissionEntity quizSubmissionEntity
-			, @ModelAttribute("quizId") int quizId
-			, @RequestParam("userName") String userName
-			, @RequestParam("password") String password
-			, @ModelAttribute("count") int count) {
+	public ModelAndView createNewAccount(@RequestParam("userName") String userName
+			, @RequestParam("password") String password) {
 		
 		try {
 	        AccountEntity account = new AccountEntity();
-	        account.setUserName(userName);
-	        account.setPassword(password);
+	        account.setUserName(userName.toLowerCase());
+	        account.setPassword(password.toLowerCase());
 	        Date currentDate = new Date();
 	        account.setRegistrationDate(currentDate);
 	        
 			em.persist(account);
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			try {
-//				if (et != null && et.isActive()) {
-//					et.rollback();
-//				}//end: if
-			} finally {
-//				if (em != null && em.isOpen()) {
-//					em.close();
-//				}//end: if
-			}//end: finally
-		}//end: try-catch-finally
+		} 
 		
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("quiz", quizEntity);
-		mv.addObject("count");
-		mv.setViewName("quizForm");
-		
-		return mv;
+		if (userName == null || password == null) {
+			return new ModelAndView("/invalidLogin");
+		} else {
+			return new ModelAndView("/login");
+		}
 	}
 	
 //	quizId moved to @ModelAttribute to persist
@@ -117,16 +101,20 @@ public class QuizControllerEntity {
 		
 //		grab the accountEntity for the String query
 		AccountEntity queryResult = result.get(0);
-
+		
+		userName = userName.toLowerCase();
+		password = password.toLowerCase();
+		
 		if (userName == null || password == null) {
 			return new ModelAndView("invalidLogin");
 		}//end: if
 		
-//		if(password.length() < 3) {
-//			return new ModelAndView("invalidLogin");
-//		}//end: if
+		if(password.length() < 2) {
+			return new ModelAndView("invalidLogin");
+		}//end: if
 		
-		if (userName.equals(queryResult.getUserName()) && password.equals(queryResult.getPassword())) {
+		if (userName.equals(queryResult.getUserName()) 
+				&& password.equals(queryResult.getPassword())) {
 			quizSubmissionEntity.setAccountEntity(queryResult);
 			queryResult.getQuizSubmissionEntities().add(quizSubmissionEntity);
 			quizSubmissionEntity.setQuizEntity(quizEntity);

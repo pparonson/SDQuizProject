@@ -28,7 +28,7 @@
              id="invalidLoginTitlePage">Please enter a valid user name and password.
         </h3>
         <label class="labelReturnLogin">
-            <div class="shake-slow shake-constant">
+            <div class="shake-slow shake-constant shake-constant--hover">
                 <a href="http://localhost:8080/SDQuizProject/"
                    class="hrefReturnLogin">
                    Return to login page

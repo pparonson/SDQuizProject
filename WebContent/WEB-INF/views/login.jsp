@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="sdQuizApp">
 <head>
@@ -10,8 +10,8 @@
     <link type="text/css"
 		  rel="stylesheet"
 		  href="stylesheets/menuStyles.css">
-	<%-- <link rel="stylesheet"
-		  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> --%>
+<!--    	<link rel="stylesheet"
+		  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">  -->  
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker"
 		  rel="stylesheet"
 		  type="text/css">
@@ -33,7 +33,7 @@
 </head>
 <div class="container-fluid">
 	<body class="container">
-		<h1 id="mainTitle" class="titlePage">Quiz App!</h1>
+		<h3 id="mainTitle" class="titlePage">Login with your new user name and password!</h3>
 		<div ng-controller="mainController"
 			 class="quizDiv">
 		 	<form action="loadQuiz.do"
@@ -65,14 +65,6 @@
 					<input class="btnSubmit" type="submit">
 				</label>
 			</form>
-			<label class="labelReturnLogin">
-            	<div class="shake-slow shake-constant">
-                	<a href="newAccount.do"
-                   	   class="hrefReturnLogin">
-   					   Create a new account 
-                	</a>
-            	</div>
-        	</label>
 		</div>
 	</body>
 </div>

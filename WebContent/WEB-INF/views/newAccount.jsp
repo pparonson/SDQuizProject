@@ -11,9 +11,9 @@
 	    <link type="text/css"
 			  rel="stylesheet"
 			  href="stylesheets/menuStyles.css">
-	    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker"
+ 	    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker"
 			  rel="stylesheet"
-			  type="text/css">
+			  type="text/css"> 
 	
 	    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 		</script>
@@ -27,7 +27,7 @@
 	<div class="container-fluid">
 		<body class="container">
 			<%-- <div class="shake-slow shake-constant">Quiz App!</div> --%>
-			<h1 id="mainTitle" class="titlePage">Quiz App!</h1>
+			<h3 id="mainTitle" class="titlePage">Create New Account</h3>
 			<div ng-controller="mainController"
 				 class="quizDiv">
 				 <div>Please create a new user name and password to play.</div>

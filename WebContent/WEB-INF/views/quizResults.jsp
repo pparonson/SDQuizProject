@@ -66,7 +66,7 @@
     	  		</table>
     	    </form>
             <label>
-                <div class="shake-slow shake-constant">
+                <div class="shake-slow shake-constant shake-constant--hover">
                     <a href="http://localhost:8080/SDQuizProject/"
                        class="hrefReturnLogin">
                        Quit
