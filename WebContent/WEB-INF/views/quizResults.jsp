@@ -11,6 +11,8 @@
     <link type="text/css"
           rel="stylesheet"
           href="stylesheets/menuStyles.css">
+    <%-- <link rel="stylesheet"
+      	  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> --%>
     <link href='https://fonts.googleapis.com/css?family=Special+Elite'
           rel='stylesheet'
           type='text/css'>
@@ -24,52 +26,54 @@
     </script>
 <title>Results</title>
 </head>
-<body class="container">
-    <div>
-	    <h2 class="titlePage">Thanks for playing!</h2>
-    </div>
-    <div class="quizDiv">
-        <span>Summary of results for: </span>
-        ${quizSubmission.accountEntity.userName}
-    </div>
-	<div class="quizDiv">
-        <span>Quiz: </span>
-        ${quiz.name}
-    </div>
-	<div class="quizDiv">
-        <span>Date: </span>
-        ${quizSubmission.submissionTime}
-    </div>
- 	<div class="quizDiv">
-		<form class="quizForm">
-	 		<table>
-	        	<th class="tableHeader" id="questionResult">Question</th>
-	        	<th class="tableHeader" id="correctResult">Correct</th>
-	        	<th class="tableHeader" id="userNameResult">${quizSubmission.accountEntity.userName}</th>
-	        	</tr>
- 	            	<c:forEach var="i"
-                               items="${quizSubmission.submissionAnswerEntities}">
-		        	<tr class="tableRow">
-		                <td class="tableData" id="questionTableData">${i.questionEntity.text}</td>
-		                <c:forEach var="j"
-                                   items="${i.questionEntity.answerEntities}">
-  	            			<c:if test='${j.correct.equals("Y")}'>
-								<td class="tableData">${j.text}</td>
-  							</c:if>
-  						</c:forEach>
- 		                <td class="tableData">${i.answerEntity.text}</td>
-	                </tr>
-	        	</c:forEach>
-	  		</table>
-	    </form>
-        <label>
-            <div class="shake-slow shake-constant">
-                <a href="http://localhost:8080/SDQuizProject/"
-                   class="hrefReturnLogin">
-                   Quit
-                </a>
-            </div>
-        </label>
-    </div>
-</body>
+<div class="container-fluid">
+    <body class="container">
+        <div>
+    	    <h2 class="titlePage">Thanks for playing!</h2>
+        </div>
+        <div class="quizDiv">
+            <span>Summary of results for: </span>
+            ${quizSubmission.accountEntity.userName}
+        </div>
+    	<div class="quizDiv">
+            <span>Quiz: </span>
+            ${quiz.name}
+        </div>
+    	<div class="quizDiv">
+            <span>Date: </span>
+            ${quizSubmission.submissionTime}
+        </div>
+     	<div class="quizDiv">
+    		<form class="quizForm">
+    	 		<table>
+    	        	<th class="tableHeader" id="questionResult">Question</th>
+    	        	<th class="tableHeader" id="correctResult">Correct</th>
+    	        	<th class="tableHeader" id="userNameResult">${quizSubmission.accountEntity.userName}</th>
+    	        	</tr>
+     	            	<c:forEach var="i"
+                                   items="${quizSubmission.submissionAnswerEntities}">
+    		        	<tr class="tableRow">
+    		                <td class="tableData" id="questionTableData">${i.questionEntity.text}</td>
+    		                <c:forEach var="j"
+                                       items="${i.questionEntity.answerEntities}">
+      	            			<c:if test='${j.correct.equals("Y")}'>
+    								<td class="tableData">${j.text}</td>
+      							</c:if>
+      						</c:forEach>
+     		                <td class="tableData">${i.answerEntity.text}</td>
+    	                </tr>
+    	        	</c:forEach>
+    	  		</table>
+    	    </form>
+            <label>
+                <div class="shake-slow shake-constant">
+                    <a href="http://localhost:8080/SDQuizProject/"
+                       class="hrefReturnLogin">
+                       Quit
+                    </a>
+                </div>
+            </label>
+        </div>
+    </body>
+</div>
 </html>

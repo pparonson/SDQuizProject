@@ -3,13 +3,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,10 +56,54 @@ public class QuizControllerEntity {
 //		return null;
 	}//end: meth
 	
+	@RequestMapping(value = "/newAccount.do", method = RequestMethod.GET)
+	public String linkNewAccount() {
+	    return "newAccount";
+	}
+	
+	@Transactional //annotation for CRUD operations
+	@RequestMapping("/createNewAccount.do")
+	public ModelAndView createNewAccount(@ModelAttribute("quiz") QuizEntity quizEntity
+//			, @RequestParam("quizId") int quizId
+			, @ModelAttribute("quizSubmission") QuizSubmissionEntity quizSubmissionEntity
+			, @ModelAttribute("quizId") int quizId
+			, @RequestParam("userName") String userName
+			, @RequestParam("password") String password
+			, @ModelAttribute("count") int count) {
+		
+		try {
+	        AccountEntity account = new AccountEntity();
+	        account.setUserName(userName);
+	        account.setPassword(password);
+	        Date currentDate = new Date();
+	        account.setRegistrationDate(currentDate);
+	        
+			em.persist(account);
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			try {
+//				if (et != null && et.isActive()) {
+//					et.rollback();
+//				}//end: if
+			} finally {
+//				if (em != null && em.isOpen()) {
+//					em.close();
+//				}//end: if
+			}//end: finally
+		}//end: try-catch-finally
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("quiz", quizEntity);
+		mv.addObject("count");
+		mv.setViewName("quizForm");
+		
+		return mv;
+	}
+	
 //	quizId moved to @ModelAttribute to persist
 	@RequestMapping("/loadQuiz.do")
 	public ModelAndView loadQuiz(@ModelAttribute("quiz") QuizEntity quizEntity
-//			, @RequestParam("quizId") int quizId
 			, @ModelAttribute("quizSubmission") QuizSubmissionEntity quizSubmissionEntity
 			, @ModelAttribute("quizId") int quizId
 			, @RequestParam("userName") String userName
@@ -68,7 +112,8 @@ public class QuizControllerEntity {
 		
 //		create entity managers				
 		String query = "SELECT a FROM AccountEntity a WHERE a.userName = ?1";
-		List<AccountEntity> result = em.createQuery(query, AccountEntity.class).setParameter(1, userName).getResultList();
+		List<AccountEntity> result = em.createQuery(query, AccountEntity.class)
+									.setParameter(1, userName).getResultList();
 		
 //		grab the accountEntity for the String query
 		AccountEntity queryResult = result.get(0);
@@ -77,9 +122,9 @@ public class QuizControllerEntity {
 			return new ModelAndView("invalidLogin");
 		}//end: if
 		
-		if(password.length() < 3) {
-			return new ModelAndView("invalidLogin");
-		}//end: if
+//		if(password.length() < 3) {
+//			return new ModelAndView("invalidLogin");
+//		}//end: if
 		
 		if (userName.equals(queryResult.getUserName()) && password.equals(queryResult.getPassword())) {
 			quizSubmissionEntity.setAccountEntity(queryResult);

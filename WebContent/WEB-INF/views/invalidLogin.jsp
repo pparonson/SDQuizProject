@@ -10,6 +10,8 @@
     <link type="text/css"
           rel="stylesheet"
           href="stylesheets/menuStyles.css">
+    <%-- <link rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> --%>
     <link href='https://fonts.googleapis.com/css?family=Permanent+Marker'
           rel='stylesheet'
           type='text/css'>
@@ -20,17 +22,19 @@
     </script>
 <title>Invalid Login</title>
 </head>
-<body class="quizDiv">
-	<h3 class="titlePage"
-         id="invalidLoginTitlePage">Please enter a valid user name and password.
-    </h3>
-    <label class="labelReturnLogin">
-        <div class="shake-slow shake-constant">
-            <a href="http://localhost:8080/SDQuizProject/"
-               class="hrefReturnLogin">
-               Return to login page
-            </a>
-        </div>
-    </label>
-</body>
+<div class="container-fluid">
+    <body class="quizDiv">
+    	<h3 class="titlePage"
+             id="invalidLoginTitlePage">Please enter a valid user name and password.
+        </h3>
+        <label class="labelReturnLogin">
+            <div class="shake-slow shake-constant">
+                <a href="http://localhost:8080/SDQuizProject/"
+                   class="hrefReturnLogin">
+                   Return to login page
+                </a>
+            </div>
+        </label>
+    </body>
+</div>
 </html>

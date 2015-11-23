@@ -12,9 +12,8 @@
     <link type="text/css"
 		  rel="stylesheet"
 		  href="stylesheets/menuStyles.css">
-    <%-- <link href='https://fonts.googleapis.com/css?family=Special+Elite'
-		  rel='stylesheet'
-		  type='text/css'> --%>
+    <%-- <link rel="stylesheet"
+		  href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> --%>
     <link href='https://fonts.googleapis.com/css?family=Permanent+Marker'
 		  rel='stylesheet'
 		  type='text/css'>
@@ -22,63 +21,65 @@
     <!-- complete script tag -->
 <title>Quiz Form</title>
 </head>
-<body>
-	<c:choose>
-		<c:when test="${count < quiz.getQuestionEntities().size() - 1}">
-			<h2 class="titlePage">${quiz.name}</h2>
-  			<c:if test="${count < 1}">
-				<div class="quizDiv">
-					This quiz has ${quiz.getQuestionEntities().size()} questions.
+<div class="container-fluid">
+	<body>
+		<c:choose>
+			<c:when test="${count < quiz.getQuestionEntities().size() - 1}">
+				<h2 class="titlePage">${quiz.name}</h2>
+	  			<c:if test="${count < 1}">
+					<div class="quizDiv">
+						This quiz has ${quiz.getQuestionEntities().size()} questions.
+					</div>
+	  			</c:if>
+			  	<div class="quizDiv">Question #: ${count + 1}</div>
+			  	<div class="quizDiv" id="quizQuestion">
+					${quiz.getQuestionEntities().get(count).getText()}
 				</div>
-  			</c:if>
-		  	<div class="quizDiv">Question #: ${count + 1}</div>
-		  	<div class="quizDiv" id="quizQuestion">
-				${quiz.getQuestionEntities().get(count).getText()}
-			</div>
- 			<form action="quizQuestion.do"
-				  method="post"
-				  class="quizDiv">
-				<table class="questionList">
-					<c:forEach var="i" items="${quiz.getQuestionEntities().get(count).getAnswerEntities()}">
-						<p class="userResponse">
-							<input type="radio"
-								   id="${count}"
-							   	   name="userResponse"
-							       value="${i.text}">
-								   <%-- broken custom css radio button using label --%>
-								   <label for="${count}"><span>${i.text}</span></label>
-								   <%-- ${i.text} --%>
-						</p>
-					</c:forEach>
-				</table>
-				<input class="btnSubmit" type="submit">
-			</form>
-  		</c:when>
-  		<c:otherwise>
-  			<h2 class="titlePage">${quiz.name}</h2>
-  			<div class="quizDiv">Question #: ${count + 1}</div>
-		  	<div class="quizDiv"
-				 id="quizQuestion">
-				 ${quiz.getQuestionEntities().get(count).getText()}
-			</div>
- 			<form action="quizResultSummary.do"
-				  method="post"
-				  class="quizDiv">
-				<table class="questionList">
-					<c:forEach var="i" items="${quiz.getQuestionEntities().get(count).getAnswerEntities()}">
-						<p class="userResponse">
-							<input type="radio"
-								   id="radio02"
-							       name="userResponse"
-							       value="${i.text}">
-								<label for="radio02"><span></span>${i.text}</label>
-								<%-- ${i.text} --%>
-						</p>
-					</c:forEach>
-				</table>
-				<input class="btnSubmit" type="submit" value="Get results!">
-			</form>
-  		</c:otherwise>
-	</c:choose>
-</body>
+	 			<form action="quizQuestion.do"
+					  method="post"
+					  class="quizDiv">
+					<table class="questionList">
+						<c:forEach var="i" items="${quiz.getQuestionEntities().get(count).getAnswerEntities()}">
+							<p class="userResponse">
+								<input type="radio"
+									   id="${count}"
+								   	   name="userResponse"
+								       value="${i.text}">
+									   <%-- broken custom css radio button using label --%>
+									   <label for="${count}"><span>${i.text}</span></label>
+									   <%-- ${i.text} --%>
+							</p>
+						</c:forEach>
+					</table>
+					<input class="btnSubmit" type="submit">
+				</form>
+	  		</c:when>
+	  		<c:otherwise>
+	  			<h2 class="titlePage">${quiz.name}</h2>
+	  			<div class="quizDiv">Question #: ${count + 1}</div>
+			  	<div class="quizDiv"
+					 id="quizQuestion">
+					 ${quiz.getQuestionEntities().get(count).getText()}
+				</div>
+	 			<form action="quizResultSummary.do"
+					  method="post"
+					  class="quizDiv">
+					<table class="questionList">
+						<c:forEach var="i" items="${quiz.getQuestionEntities().get(count).getAnswerEntities()}">
+							<p class="userResponse">
+								<input type="radio"
+									   id="radio02"
+								       name="userResponse"
+								       value="${i.text}">
+									<label for="radio02"><span></span>${i.text}</label>
+									<%-- ${i.text} --%>
+							</p>
+						</c:forEach>
+					</table>
+					<input class="btnSubmit" type="submit" value="Get results!">
+				</form>
+	  		</c:otherwise>
+		</c:choose>
+	</body>
+</div>
 </html>
